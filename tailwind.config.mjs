@@ -10,6 +10,12 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        softBlue: '#AFCFD6',
+        sandyBeach: '#AB9E7F',
+        warmBeige: '#D4CAA2',
+        turquoise: '#B9DDDC',
+        coastWave: '#C6E7E7',
+        lightGray: '#EAEAEA',
       },
     },
   },
