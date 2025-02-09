@@ -1,14 +1,21 @@
 "use client";
 import { useState } from "react";
+import AIChatPopup from "@/app/components/AIChatPopup";
 
 export default function Dashboard() {
     const [foodLog, setFoodLog] = useState({ breakfast: "", lunch: "", dinner: "", snack: "", water: "" });
     const [selectedMood, setSelectedMood] = useState(null);
+    const [showChat, setShowChat] = useState(false);
 
     const moods = ["😀 Happy", "😐 Neutral", "😞 Sad", "😤 Stressed", "😴 Tired"];
 
     const handleFoodLogChange = (meal, value) => {
         setFoodLog({ ...foodLog, [meal]: value });
+    };
+
+    const handleMoodSelect = (mood) => {
+        setSelectedMood(mood);
+        setShowChat(true); 
     };
 
     return (
@@ -19,13 +26,13 @@ export default function Dashboard() {
                 <h2 className="text-xl font-semibold text-sandyBeach mb-4">Log Your Food & Water</h2>
                 {["breakfast", "lunch", "dinner", "snack", "water"].map((meal) => (
                     <div key={meal} className="mb-3">
-                        <label className="block text-gray-700 capitalize">{meal}</label>
+                        <label className="block text-gray-500 capitalize">{meal}</label>
                         <input
                             type="text"
                             placeholder={`Enter your ${meal}`}
                             value={foodLog[meal]}
                             onChange={(e) => handleFoodLogChange(meal, e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg outline-none"
+                            className="w-full p-2 border border-gray-300 rounded-lg outline-none text-gray-700"
                         />
                     </div>
                 ))}
@@ -38,13 +45,15 @@ export default function Dashboard() {
                         <button
                             key={mood}
                             className={`px-4 py-2 rounded-lg shadow-md text-softBlue ${selectedMood === mood ? "bg-coastWave" : "bg-sandyBeach hover:bg-turquoise"} transition`}
-                            onClick={() => setSelectedMood(mood)}
+                            onClick={() => handleMoodSelect(mood)}
                         >
                             {mood}
                         </button>
                     ))}
                 </div>
             </div>
+
+            {showChat && <AIChatPopup mood={selectedMood} onClose={() => setShowChat(false)} />}
 
             <button className="mt-6 bg-red-500 text-white px-6 py-2 rounded-xl shadow-md hover:bg-red-600 transition">
                 Logout

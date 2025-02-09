@@ -15,7 +15,7 @@ export default {
         warmBeige: '#D4CAA2',
         turquoise: '#B9DDDC',
         coastWave: '#C6E7E7',
-        lightGray: '#EAEAEA',
+        oceanBlue: '#009DC4',
       },
     },
   },
